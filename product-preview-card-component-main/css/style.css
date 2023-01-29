@@ -1,0 +1,181 @@
+:root {
+  --clr-primary: hsl(158, 36%, 37%);
+  --clr-hover: hsl(158, 36%, 20%);
+
+  --clr-secondary: hsl(30, 38%, 92%);
+  --clr-neutral-blue: hsl(212, 21%, 14%);
+  --clr-neutral-grey: hsl(228, 12%, 48%);
+  --clr-neutral-white: hsl(0, 0%, 100%);
+
+  --fontweight-regular: 500;
+  --fontweight-bold: 700;
+
+  --fontfamily-Fr: 'Fraunces', serif;
+  --fontfamily-Mo: 'Montserrat', sans-serif;
+}
+
+/* reset css for responsive sit */
+/*
+  1. Use a more-intuitive box-sizing model.
+*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+/*
+    2. Remove default margin
+  */
+* {
+  margin: 0;
+}
+
+/*
+    3. Allow percentage-based heights in the application
+  */
+html,
+body {
+  height: 100%;
+}
+
+/*
+    Typographic tweaks!
+    4. Add accessible line-height
+    5. Improve text rendering
+  */
+body {
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  /* general styling */
+  font-family: var(--fontfamily-Mo);
+  font-weight: var(--fontweight-regular);
+  /* 14px */
+  font-size: 0.875rem;
+  background-color: var(--clr-secondary);
+  color: var(--clr-neutral-grey);
+
+  /* put in middle - with reset if doesn't work put min-height: 100vh;*/
+  display: grid;
+  place-content: center;
+  margin: 1rem;
+}
+
+/*
+    6. Improve media defaults
+  */
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*
+    7. Remove built-in form typography styles
+  */
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
+h1, h2, h3 {
+  line-height: 1;
+}
+
+/* get prices next to eachother */
+.flex-group {
+  display: flex;
+  gap: 1rem;
+  /* prevent overflow */
+  flex-wrap: wrap;
+  align-items: center;
+}
+/* desktop */
+@media (min-width: 600px) {
+  .product {
+    --content-pading: 2rem;
+  grid-template-columns: 1fr 1fr;
+  }
+}
+
+.product {
+  /* local var only available to use for children in class product */
+  --content-pading: 1.5rem;
+  --content-spacing: 1rem;
+  background-color: var(--clr-neutral-white);
+  border-radius: 0.5rem;
+  /* makes the edges round regardless of img etc */
+  overflow: hidden;
+  /* desktop version */
+  display: grid;
+  max-width: 600px;
+}
+
+.product__body {
+  padding: var(--content-pading);
+  /* makes button stretch across */
+  display: grid;
+  gap: var(--content-spacing);
+}
+
+.product__perfume {
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  font-size: 0.8125rem;
+}
+
+.product__title {
+  font-size: 2rem;
+  font-family: var(--fontfamily-Fr);
+  color: var(--clr-neutral-blue);
+}
+.product__price {
+  font-size: 2rem;
+  font-family: var(--fontfamily-Fr);
+  color: var(--clr-primary);
+  font-weight: 650;
+}
+/* https://www.scottohara.me/blog/2017/04/14/inclusively-hidden.html */
+.sr-only:not(:focus):not(:active) {
+  clip: rect(0 0 0 0); 
+  clip-path: inset(50%);
+  height: 1px;
+  overflow: hidden;
+  position: absolute;
+  white-space: nowrap; 
+  width: 1px;
+}
+
+/* button */
+.button {
+  cursor: pointer;
+  padding: .75em 1.5em;
+  border: 0;
+  text-decoration: none;
+  /* as adding cart imagine next to it add inline flex */
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: var(--clr-primary);
+  color: var(--clr-neutral-white);
+  font-weight: var(--fontweight-bold);
+  font-size: 0.925rem;
+  border-radius: .5rem;
+}
+
+.button[data-icon="shopping-cart"]::before {
+  content: "";
+  width: 15px;
+  height: 16px;
+  background-image: url("/product-preview-card-component-main/images/icon-cart.svg");
+}
+/* group things with is */ 
+.button:is(:hover, :focus) {
+  background-color: var(--clr-hover);
+}
